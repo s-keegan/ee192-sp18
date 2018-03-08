@@ -107,14 +107,16 @@ def find_track(linescans):
 	filter = np.zeros(128)
 	filter[0] = 1
 	filter[1] = -1
+	prev_center = 0
 	for i in range(n):
-		difference = np.correlate(linescans, filter)
+		difference = np.correlate(linescans[i], filter)
 		low = np.argmin(difference)
 		high = np.argmax(difference)
 		center = high + low / 2
+		prev_center = center
 		track_center_list[i] = center
 		track_found_list[i] = True
-		cross_found_list[i] = True
+		cross_found_list[i] = False
     ### Code to be added here
     ###
     ###
